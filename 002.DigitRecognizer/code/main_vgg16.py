@@ -51,12 +51,12 @@ def defineModel(input_shape):
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool')(x)
 
     # Block 2
-    x = Conv2D(64, (3, 3), activation='relu', padding='same', name='block2_conv1')(x)
+    # x = Conv2D(64, (3, 3), activation='relu', padding='same', name='block2_conv1')(x)
     # x = Conv2D(128, (3, 3), activation='relu', padding='same', name='block2_conv2')(x)
-    x = MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool')(x)
+    # x = MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool')(x)
 
     x = Flatten(name='flatten')(x)
-    x = Dense(100, activation='relu', name='fc1')(x)
+    x = Dense(30, activation='relu', name='fc1')(x)
     # x = Dense(100, activation='relu', name='fc2')(x)
     x = Dense(10, activation='softmax', name='predictions')(x)
 
@@ -70,7 +70,7 @@ if __name__ == "__main__":
     # model = Model(inputs=inp, outputs=x_categories)  # basemodel共28层
     # print model.summary()
 
-    type = "train"
+    type = "run"
 
     # a = np.array([[1, 5, 5, 2],
     #               [9, 6, 2, 8],
@@ -101,10 +101,10 @@ if __name__ == "__main__":
     model = defineModel((28,28,1))
     print model.summary()
 
-    model.load_weights('../output/weights-cnn-2-49.hdf5')
-    checkpoint = ModelCheckpoint('../output/weights-cnn-3-{epoch:02d}.hdf5',
+    model.load_weights('../output/weights-cnn-4-49.hdf5')
+    checkpoint = ModelCheckpoint('../output/weights-cnn-4-{epoch:02d}.hdf5',
                                  save_weights_only=True)
-    adam = Adam(lr=0.0001)
+    adam = Adam(lr=0.00001)
     model.compile(optimizer=adam,
                   loss='categorical_crossentropy',
                   metrics=['accuracy'])
